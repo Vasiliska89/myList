@@ -71,7 +71,11 @@ void poptail(list*& sp) {
     else poptail(sp->next);
 }
 void del(list*& sp, int id) {
-    if (sp->id == id) sp = sp->next;
+    if (sp->id == id) {
+        list* tmp = sp->next;
+        free(sp);
+        sp = tmp;
+    }
     else {
         if (sp->next != NULL && sp->next->id == id) sp->next = sp->next->next;
         else {
@@ -82,7 +86,9 @@ void del(list*& sp, int id) {
 }
 void del2(list*& sp, int id) {
     if (sp->next != NULL && sp->next->id == id) {
-        sp->next = sp->next->next;
+        list* tmp = sp->next->next;
+        free(sp->next);
+        sp->next = tmp;
         del2(sp, id);
     }
     else if (sp->next != NULL && sp->next->id != id) del2(sp->next, id);
