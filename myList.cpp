@@ -22,6 +22,7 @@ int main()
         case(3):
 
             show(head);
+            _getch();
             break;
         case(4):
 
