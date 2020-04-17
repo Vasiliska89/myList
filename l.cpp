@@ -64,10 +64,16 @@ void tail(list*& sp, int val) {
     else tail(sp->next, val);
 }
 void pop(list*& sp) {
-    sp = sp->next;
+    list* tmp = sp->next;
+    free(sp);
+    sp = tmp;
 }
 void poptail(list*& sp) {
-    if (sp->next == NULL) sp = NULL;
+    if (sp->next == NULL) {
+        list* tmp = sp->next;
+        free(sp);
+        sp = tmp;
+    }
     else poptail(sp->next);
 }
 void del(list*& sp, int id) {
